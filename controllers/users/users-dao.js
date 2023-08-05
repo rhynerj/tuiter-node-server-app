@@ -15,25 +15,33 @@ export const findUserByUsername = (username) => {
 };
 
 export const findUserByCredentials = (username, password) => {
-    const index = users.findIndex.find((u) => u.username === username && u.password === password);
+    const index = users.findIndex((u) => u.username === username && u.password === password);
     if (index !== -1) return users[index];
     return null;
 };
 
 export const createUser = (user) => {
     const newUser = {
-        _id: (new Date()).getTime(),
         firstName: '',
         lastName: '',
         ...user
     }
+    newUser._id = (new Date()).getTime() + '';
+    // const newUser = user;
+    // newUser._id = (new Date()).getTime() + '';
+    // newUser.firstName = '';
+    // newUser.lastName = '';
     users.push(newUser);
+    console.log('users')
+    console.log(users);
+    return newUser;
 }
 
 export const updateUser = (uid, user) => {
     const index = users.findIndex((u) => u._id === uid);
     users[index] = { ...users[index], ...user };
-    return { status: 'ok' }
+    console.log(users)
+    return users[index];
 };
 
 export const deleteUser = (uid) => {

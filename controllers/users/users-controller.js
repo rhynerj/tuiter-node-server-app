@@ -6,10 +6,11 @@ const UserController = (app) => {
     app.get('/api/users/:uid', findUserById);
     app.post('/api/users', createUser);
     app.delete('/api/users/:uid', deleteUser);
-    app.put('/api/users/:uid', updateUser);
+    // app.put('/api/users/:uid', updateUser);
 }
 
 const updateUser = (req, res) => {
+    console.log('update uc')
     const userId = req.params['uid'];
     const updates = req.body;
     users = users.map((usr) =>
