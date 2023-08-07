@@ -27,6 +27,10 @@ if (process.env.NODE_ENV !== "development") {
         secure: true,
     };
 }
+sessionOptions.cookie = {
+    sameSite: "none",
+    secure: true,
+};
 app.use(
     session(sessionOptions)
 );

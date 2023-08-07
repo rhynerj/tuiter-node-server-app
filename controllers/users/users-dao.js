@@ -37,7 +37,7 @@ export const createUser = (user) => {
     return newUser;
 }
 
-export const updateUser = (uid, user) => {
+export const updateUserDao = (uid, user) => {
     const index = users.findIndex((u) => u._id === uid);
     users[index] = { ...users[index], ...user };
     console.log(users)

@@ -9,7 +9,7 @@ const UserController = (app) => {
     // app.put('/api/users/:uid', updateUser);
 }
 
-const updateUser = (req, res) => {
+export const updateUser = (req, res) => {
     console.log('update uc')
     const userId = req.params['uid'];
     const updates = req.body;

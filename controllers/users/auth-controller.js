@@ -1,4 +1,5 @@
 import * as usersDao from './users-dao.js';
+import updateUser from './users-controller.js';
 
 var currUser;
 
@@ -16,8 +17,8 @@ const AuthController = (app) => {
         console.log(req.body)
         console.log('new user')
         console.log(newUser)
-        console.log('req session')
-        console.log(req.session)
+        console.log('reg session')
+        console.log(req.session.id)
 
         req.session["currentUser"] = newUser;
         // currUser = newUser;
@@ -27,20 +28,21 @@ const AuthController = (app) => {
 
         res.json(newUser);
     };
-    const login = async (req, res) => {
+    const login = (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
-        const user = await usersDao.findUserByCredentials(username, password);
+        const user = usersDao.findUserByCredentials(username, password);
+
         if (user) {
             req.session["currentUser"] = user;
             // currUser = user;
-            
+
             console.log('user')
             console.log(user)
-            
+
             console.log('current user')
             console.log(req.session['currentUser'])
-            
+
             res.json(user);
         } else {
             res.sendStatus(404);
@@ -49,6 +51,9 @@ const AuthController = (app) => {
     const profile = (req, res) => {
         const currentUser = req.session["currentUser"];
         // const currentUser = currUser;
+
+        console.log('profile session')
+        console.log(req.session.id)
 
         console.log('current user profile')
         console.log(currentUser)
@@ -71,11 +76,14 @@ const AuthController = (app) => {
         const currentUser = req.session["currentUser"];
         // const currentUser = currUser;
         console.log(currentUser)
+        if(!currentUser) {
+            updateUser(req, res);
+        }
         if (currentUser._id !== uid) {
             res.sendStatus(409);
             return;
         }
-        const updatedUser = usersDao.updateUser(uid, updates);
+        const updatedUser = usersDao.updateUserDao(uid, updates);
         req.session["currentUser"] = updatedUser;
         // currUser = updatedUser;
         res.json(updatedUser);
