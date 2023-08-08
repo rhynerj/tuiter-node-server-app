@@ -19,6 +19,9 @@ const sessionOptions = {
     secret: "any string",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+        sameSite: "lax",
+    },
 };
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
@@ -27,10 +30,6 @@ if (process.env.NODE_ENV !== "development") {
         secure: true,
     };
 }
-sessionOptions.cookie = {
-    sameSite: "none",
-    secure: true,
-};
 app.use(
     session(sessionOptions)
 );

@@ -1,7 +1,5 @@
 import * as usersDao from './users-dao.js';
-import updateUser from './users-controller.js';
-
-var currUser;
+// var currUser;
 
 const AuthController = (app) => {
     const register = async (req, res) => {
@@ -76,17 +74,19 @@ const AuthController = (app) => {
         const currentUser = req.session["currentUser"];
         // const currentUser = currUser;
         console.log(currentUser)
-        if(!currentUser) {
-            updateUser(req, res);
+        if (currentUser) {
+            if (currentUser._id !== uid) {
+                res.sendStatus(409);
+                return;
+            }
+            const updatedUser = usersDao.updateUserDao(uid, updates);
+            req.session["currentUser"] = updatedUser;
+            // currUser = updatedUser;
+            res.json(updatedUser);
+        } else {
+            usersDao.updateUserNoAuth(uid, updates);
+            res.sendStatus(200);
         }
-        if (currentUser._id !== uid) {
-            res.sendStatus(409);
-            return;
-        }
-        const updatedUser = usersDao.updateUserDao(uid, updates);
-        req.session["currentUser"] = updatedUser;
-        // currUser = updatedUser;
-        res.json(updatedUser);
     };
     app.post('/api/users/register', register);
     app.post('/api/users/login', login);

@@ -1,3 +1,5 @@
+import { updateUser } from "./users-controller.js";
+
 let users = [];
 
 export const findAllUsers = () => users;
@@ -35,13 +37,17 @@ export const createUser = (user) => {
     console.log('users')
     console.log(users);
     return newUser;
-}
+};
 
-export const updateUserDao = (uid, user) => {
+export const updateUserDao = (uid, updates) => {
     const index = users.findIndex((u) => u._id === uid);
-    users[index] = { ...users[index], ...user };
+    users[index] = { ...users[index], ...updates };
     console.log(users)
     return users[index];
+};
+
+export const updateUserNoAuth = (uid, updates) => {
+    updateUser(uid, updates);
 };
 
 export const deleteUser = (uid) => {

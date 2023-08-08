@@ -9,16 +9,28 @@ const UserController = (app) => {
     // app.put('/api/users/:uid', updateUser);
 }
 
-export const updateUser = (req, res) => {
+// const updateUser = (req, res) => {
+//     console.log('update uc')
+//     const userId = req.params['uid'];
+//     const updates = req.body;
+//     users = users.map((usr) =>
+//         usr._id === userId ?
+//             { ...usr, ...updates } :
+//             usr);
+//     // res.sendStatus(200);
+// }
+
+export const updateUser = (uid, updates) => {
     console.log('update uc')
-    const userId = req.params['uid'];
-    const updates = req.body;
-    users = users.map((usr) =>
-        usr._id === userId ?
+    console.log(uid)
+    users = users.map((usr) => {
+        console.log(usr)
+        return (usr._id === uid ?
             { ...usr, ...updates } :
-            usr);
-    res.sendStatus(200);
+            usr)
+    });
 }
+
 const deleteUser = (req, res) => {
     const userId = req.params['uid'];
     users = users.filter(usr => usr._id !== userId);
