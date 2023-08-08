@@ -34,15 +34,12 @@ export const createUser = (user) => {
     // newUser.firstName = '';
     // newUser.lastName = '';
     users.push(newUser);
-    console.log('users')
-    console.log(users);
     return newUser;
 };
 
 export const updateUserDao = (uid, updates) => {
     const index = users.findIndex((u) => u._id === uid);
     users[index] = { ...users[index], ...updates };
-    console.log(users)
     return users[index];
 };
 

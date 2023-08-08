@@ -3,15 +3,35 @@ import posts from './tuits.js';
 let tuits = posts;
 
 const createTuit = (req, res) => {
-    const newTuit = req.body;
-    newTuit._id = (new Date()).getTime() + '';
-    newTuit.image = 'default.png';
-    newTuit.replies = 0;
-    newTuit.retuits = 0;
-    newTuit.likes = 0;
-    newTuit.liked = false;
-    newTuit.dislikes = 0;
-    newTuit.disliked = false;
+    const tuit = req.body;
+
+    const newTuit = {
+        _id: (new Date()).getTime() + '',
+        handle: '@nasa',
+        username: 'NASA',
+        image: 'nasa.png',
+        time: '0h',
+        replies: 0,
+        retuits: 0,
+        likes: 0,
+        liked: false,
+        dislikes: 0,
+        disliked: false,
+        ...tuit
+    }
+
+    // newTuit._id = (new Date()).getTime() + '';
+    // newTuit.handle = '@nasa';
+    // newTuit.username = 'NASA';
+    // newTuit.image = 'nasa.png';
+    // newTuit.time = '0h';
+    // newTuit.replies = 0;
+    // newTuit.retuits = 0;
+    // newTuit.likes = 0;
+    // newTuit.liked = false;
+    // newTuit.dislikes = 0;
+    // newTuit.disliked = false;
+
     tuits.push(newTuit);
     res.json(newTuit);
 }

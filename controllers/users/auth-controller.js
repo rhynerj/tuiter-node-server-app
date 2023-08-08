@@ -11,18 +11,8 @@ const AuthController = (app) => {
         }
         const newUser = await usersDao.createUser(req.body);
 
-        console.log('req body')
-        console.log(req.body)
-        console.log('new user')
-        console.log(newUser)
-        console.log('reg session')
-        console.log(req.session.id)
-
         req.session["currentUser"] = newUser;
         // currUser = newUser;
-
-        console.log('current user')
-        console.log(req.session["currentUser"])
 
         res.json(newUser);
     };
@@ -35,12 +25,6 @@ const AuthController = (app) => {
             req.session["currentUser"] = user;
             // currUser = user;
 
-            console.log('user')
-            console.log(user)
-
-            console.log('current user')
-            console.log(req.session['currentUser'])
-
             res.json(user);
         } else {
             res.sendStatus(404);
@@ -49,12 +33,6 @@ const AuthController = (app) => {
     const profile = (req, res) => {
         const currentUser = req.session["currentUser"];
         // const currentUser = currUser;
-
-        console.log('profile session')
-        console.log(req.session.id)
-
-        console.log('current user profile')
-        console.log(currentUser)
 
         if (!currentUser) {
             res.sendStatus(404);
@@ -67,13 +45,11 @@ const AuthController = (app) => {
         res.sendStatus(200);
     };
     const update = (req, res) => {
-        console.log('update')
         const uid = req.params.uid;
-        console.log(uid)
         const updates = req.body;
         const currentUser = req.session["currentUser"];
         // const currentUser = currUser;
-        console.log(currentUser)
+
         if (currentUser) {
             if (currentUser._id !== uid) {
                 res.sendStatus(409);

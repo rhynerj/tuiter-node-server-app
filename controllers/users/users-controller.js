@@ -10,7 +10,6 @@ const UserController = (app) => {
 }
 
 // const updateUser = (req, res) => {
-//     console.log('update uc')
 //     const userId = req.params['uid'];
 //     const updates = req.body;
 //     users = users.map((usr) =>
@@ -21,10 +20,7 @@ const UserController = (app) => {
 // }
 
 export const updateUser = (uid, updates) => {
-    console.log('update uc')
-    console.log(uid)
     users = users.map((usr) => {
-        console.log(usr)
         return (usr._id === uid ?
             { ...usr, ...updates } :
             usr)
