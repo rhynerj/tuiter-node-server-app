@@ -9,16 +9,16 @@ const createTuit = async (req, res) => {
 
     const newTuit = {
         // _id: (new Date()).getTime() + '',
-        handle: '@nasa',
-        username: 'NASA',
-        image: 'nasa.png',
-        time: '0h',
+        // handle: '@nasa',
+        // username: 'NASA',
+        // image: 'nasa.png',
+        // time: '0h',
         replies: 0,
         retuits: 0,
         likes: 0,
         liked: false,
-        dislikes: 0,
-        disliked: false,
+        // dislikes: 0,
+        // disliked: false,
         ...tuit
     }
 
