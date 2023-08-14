@@ -9,16 +9,16 @@ const createTuit = async (req, res) => {
 
     const newTuit = {
         // _id: (new Date()).getTime() + '',
-        // handle: '@nasa',
-        // username: 'NASA',
-        // image: 'nasa.png',
-        // time: '0h',
+        handle: '@nasa',
+        username: 'NASA',
+        image: 'nasa.png',
+        time: '0h',
         replies: 0,
         retuits: 0,
         likes: 0,
         liked: false,
-        // dislikes: 0,
-        // disliked: false,
+        dislikes: 0,
+        disliked: false,
         ...tuit
     }
 
@@ -28,7 +28,6 @@ const createTuit = async (req, res) => {
 }
 const findTuits = async (req, res) => {
     const tuits = await tuitsDao.findTuits();
-    console.log(tuits)
     res.json(tuits);
 }
 const updateTuit = async (req, res) => {
@@ -36,7 +35,7 @@ const updateTuit = async (req, res) => {
     const updates = req.body;
     // const tuitIndex = tuits.findIndex((t) => t._id === tuitId);
     // tuits[tuitIndex] = { ...tuits[tuitIndex], ...updates };
-    const status = await tuitsDao.updateTuit(tuitIdToUpdate);
+    const status = await tuitsDao.updateTuit(tuitIdToUpdate, updates);
     res.json(status);
 }
 const deleteTuit = async (req, res) => {
